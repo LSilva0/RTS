@@ -1,3 +1,20 @@
-[gd_scene format=3 uid="uid://0kp6ghpvhrvx"]
+[gd_scene load_steps=2 format=3 uid="uid://0kp6ghpvhrvx"]
 
-[node name="Main" type="Node2D"]
+[ext_resource type="PackedScene" uid="uid://q2p2v1xukdr2" path="res://unit.tscn" id="1_ig7tw"]
+
+[node name="World" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+layout_direction = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1.68458e-06, 0.668305, 0.512365, 1)
+
+[node name="Unit" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(491, 257)
