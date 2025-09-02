@@ -15,6 +15,10 @@ run/main_scene="uid://0kp6ghpvhrvx"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[global_group]
+
+Units=""
+
 [input]
 
 set_target={
