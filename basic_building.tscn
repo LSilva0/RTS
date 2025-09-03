@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://e7xigmqe1n7j"]
+
+[ext_resource type="Texture2D" uid="uid://3ncc1d15oelr" path="res://FriendlyBase.svg" id="1_xk8f4"]
+[ext_resource type="Script" uid="uid://b50lbjelhjw3u" path="res://basic_building.gd" id="2_1a1gy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1a1gy"]
+
+[node name="BasicBuilding" type="Sprite2D"]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_xk8f4")
+script = ExtResource("2_1a1gy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 5
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+scale = Vector2(40, 40)
+shape = SubResource("CircleShape2D_1a1gy")
+
+[node name="SpawnPosition" type="Node2D" parent="."]
+position = Vector2(0, 700)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
