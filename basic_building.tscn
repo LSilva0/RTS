@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://e7xigmqe1n7j"]
+[gd_scene load_steps=5 format=3 uid="uid://e7xigmqe1n7j"]
 
 [ext_resource type="Texture2D" uid="uid://3ncc1d15oelr" path="res://FriendlyBase.svg" id="1_xk8f4"]
 [ext_resource type="Script" uid="uid://b50lbjelhjw3u" path="res://basic_building.gd" id="2_1a1gy"]
+[ext_resource type="PackedScene" uid="uid://d0e6hohr6ht53" path="res://building_mode.tscn" id="3_701y5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1a1gy"]
 
@@ -17,11 +18,15 @@ collision_mask = 5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 scale = Vector2(40, 40)
 shape = SubResource("CircleShape2D_1a1gy")
+disabled = true
 
 [node name="SpawnPosition" type="Node2D" parent="."]
-position = Vector2(0, 700)
+position = Vector2(10, 700)
 
 [node name="SpawnTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="BuildingMode" parent="." node_paths=PackedStringArray("parent_building") instance=ExtResource("3_701y5")]
+parent_building = NodePath("..")
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
