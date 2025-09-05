@@ -1,10 +1,48 @@
-[gd_scene load_steps=5 format=3 uid="uid://e7xigmqe1n7j"]
+[gd_scene load_steps=8 format=3 uid="uid://e7xigmqe1n7j"]
 
 [ext_resource type="Texture2D" uid="uid://3ncc1d15oelr" path="res://FriendlyBase.svg" id="1_xk8f4"]
 [ext_resource type="Script" uid="uid://b50lbjelhjw3u" path="res://basic_building.gd" id="2_1a1gy"]
 [ext_resource type="PackedScene" uid="uid://d0e6hohr6ht53" path="res://building_mode.tscn" id="3_701y5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1a1gy"]
+
+[sub_resource type="Animation" id="Animation_701y5"]
+resource_name = "building"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.15, 0.15), Vector2(0.14, 0.14), Vector2(0.15, 0.15), Vector2(0.14, 0.14)]
+}
+
+[sub_resource type="Animation" id="Animation_onaq7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.15, 0.15)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ckcdb"]
+_data = {
+&"RESET": SubResource("Animation_onaq7"),
+&"building": SubResource("Animation_701y5")
+}
 
 [node name="BasicBuilding" type="Sprite2D"]
 scale = Vector2(0.15, 0.15)
@@ -24,9 +62,21 @@ disabled = true
 position = Vector2(10, 700)
 
 [node name="SpawnTimer" type="Timer" parent="."]
-autostart = true
+wait_time = 5.0
 
 [node name="BuildingMode" parent="." node_paths=PackedStringArray("parent_building") instance=ExtResource("3_701y5")]
 parent_building = NodePath("..")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -246.667
+offset_top = -533.333
+offset_right = 253.333
+offset_bottom = -433.333
+show_percentage = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ckcdb")
+}
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

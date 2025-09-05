@@ -4,9 +4,15 @@ extends Sprite2D
 var loaded_unit : PackedScene
 var is_building = true
 @onready var building_mode := $BuildingMode
+@onready var animation_player = $AnimationPlayer
+@onready var progress_bar = $ProgressBar
+@onready var spawn_timer = $SpawnTimer
 func _ready():
 	loaded_unit = load(unit_scene_path)
 	building_mode.build_building.connect(_set_building_mode)
+
+func _process(delta):
+	progress_bar.value = -(spawn_timer.time_left - progress_bar.max_value)
 
 func _on_spawn_timer_timeout() -> void:
 	if !is_building:
@@ -14,6 +20,10 @@ func _on_spawn_timer_timeout() -> void:
 		get_tree().root.add_child(new_unit)
 		new_unit.global_position = $SpawnPosition.global_position
 
+
 func _set_building_mode():
 	is_building = false
 	$StaticBody2D/CollisionShape2D.disabled = false
+	spawn_timer.start()
+	progress_bar.max_value = spawn_timer.time_left
+	animation_player.play("building")
