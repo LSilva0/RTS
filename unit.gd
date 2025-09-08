@@ -37,7 +37,7 @@ func _physics_process(delta):
 	av = avoid()
 	velocity = (velocity + av * avoid_weight).normalized() * speed
 	move_and_collide(velocity * delta)
-	print(velocity)
+	
 	if velocity != Vector2.ZERO and stopped == true:
 		stopped = false
 		stop_idle_animation()

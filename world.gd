@@ -5,6 +5,8 @@ var drag_start = Vector2.ZERO
 var select_rect = RectangleShape2D.new()
 var selected = []
 var has_building = false
+var build_mode_on = false
+var current_building = null
 @onready var building_scene = preload("res://basic_building.tscn")
 @export var color_rect = ColorRect
 func _ready():
@@ -39,9 +41,23 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _input(event):
 	if event.is_action_pressed("add_building") and !has_building:
-		var building = building_scene.instantiate()
+		current_building = building_scene.instantiate()
 		has_building = true
-		add_child(building)
+		add_child(current_building)
+		build_mode_on = true
+		current_building.get_node("BuildingMode").build_building.connect(_on_building_placed)
+		
+	elif event.is_action_pressed("add_building") and has_building and build_mode_on:
+	
+		build_mode_on = false
+		has_building = false
+		if current_building:
+			remove_child(current_building)
+			current_building.queue_free()
+			current_building = null
+
+func _on_building_placed():
+	build_mode_on = false
 
 func _draw():
 	if dragging:

@@ -5,12 +5,13 @@ extends Node2D
 var query_rect = RectangleShape2D.new()
 var can_build = []
 var has_built = false
-
+var placed = false
 signal build_building
 
 func _input(event):
-	if event.is_action_pressed("build") and can_build.size() == 0:
+	if event.is_action_pressed("build") and can_build.size() == 0 and placed == false:
 		build_building.emit()
+		placed = true
 		has_built = true
 		queue_redraw()
 
