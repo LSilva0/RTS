@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://ygy8sym77n73"]
+
+[ext_resource type="Texture2D" uid="uid://3ncc1d15oelr" path="res://FriendlyBase.svg" id="1_r04n3"]
+[ext_resource type="Script" uid="uid://b0c7ymyecxvpe" path="res://button.gd" id="1_vxja4"]
+[ext_resource type="PackedScene" uid="uid://e7xigmqe1n7j" path="res://basic_building.tscn" id="3_lt4la"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_n4tde"]
+font_size = 150
+
+[node name="BuildingManager" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vxja4")
+building_sprite = ExtResource("1_r04n3")
+building_scene = ExtResource("3_lt4la")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 908.0
+offset_bottom = 935.0
+scale = Vector2(0.1, 0.1)
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+icon = ExtResource("1_r04n3")
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Flier Base"
+label_settings = SubResource("LabelSettings_n4tde")
+horizontal_alignment = 1

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://0kp6ghpvhrvx"]
+[gd_scene load_steps=3 format=3 uid="uid://0kp6ghpvhrvx"]
 
 [ext_resource type="Script" uid="uid://bnam678ue20ab" path="res://world.gd" id="1_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://ygy8sym77n73" path="res://building_manager.tscn" id="2_fj7yv"]
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("color_rect")]
 z_index = 1
@@ -14,3 +15,9 @@ z_as_relative = false
 offset_right = 1152.0
 offset_bottom = 648.0
 color = Color(0.779452, 0.613813, 0.392035, 1)
+
+[node name="Control" parent="." instance=ExtResource("2_fj7yv")]
+offset_left = 100.0
+offset_top = 500.0
+offset_right = 100.0
+offset_bottom = 500.0
